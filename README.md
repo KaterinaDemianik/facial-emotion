@@ -1,17 +1,17 @@
 # Тип задачі: класифікація зображень (визначення типу емоцій на обличчі)
 
-# Використані 3 рівні моделей: 
+## Використані 3 рівні моделей: 
 - **Проста модель** — HOG + Logistic Regression (використала бібліотеку scikit-learn)
 - **Середня модель** — Small CNN (PyTorch) 
 - **Складна модель** — Vision Transformer (ViT) (бібліотека timm)
 
 ### Використаний датасет: **FER2013** посилання: https://www.kaggle.com/datasets/msambare/fer2013?resource=download вам треба його викачати вручну бо через обмеження GitHub датасет **не зберігається у репозиторії** . 
 
-# 1. Завантажте викачений датасет за посиланням вище, та закачайте його в папку проекту , щоб вона лежала в корені проекту разом з файлом train_fer.py, ПЕРЕЙМЕНУЙТЕ його на fer2013.zip
+## 1. Завантажте викачений датасет за посиланням вище, та закачайте його в папку проекту , щоб вона лежала в корені проекту разом з файлом train_fer.py, ПЕРЕЙМЕНУЙТЕ його на fer2013.zip
 
 #### оскільки в мене macOS, команди на нього є точними та працюючими, на Windows я шукала відповідники, надіюсь вони теж працюють, на жаль не маю змоги це перевірити, якщо у вас саме ця система
 
-# 2. Створіть і увійдіть у віртуальне середовище:
+## 2. Створіть і увійдіть у віртуальне середовище:
 
 ### Mac / Linux
 ```bash
@@ -25,7 +25,7 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-# 3. Встановіть бібліотеки: 
+## 3. Встановіть бібліотеки: 
 ### Mac / Linux
 ```bash
 pip install numpy pillow torch torchvision tqdm scikit-learn scikit-image timm
@@ -36,7 +36,7 @@ pip install numpy pillow torch torchvision tqdm scikit-learn scikit-image timm
 pip install numpy pillow torch torchvision tqdm scikit-learn scikit-image timm
 ```
 
-# 4. Прибираємо старі дані, якщо були
+## 4. Прибираємо старі дані, якщо були
 
 ### Mac / Linux
 ```bash
@@ -47,7 +47,7 @@ rm -rf data
 Remove-Item -Recurse -Force data
 ```
 
-# 5. Створюємо кореневу папку для даних
+## 5. Створюємо кореневу папку для даних
 
 ### Mac / Linux
 ```bash
@@ -59,7 +59,7 @@ mkdir -p data
 New-Item -ItemType Directory -Force -Path data | Out-Null
 ```
 
-# 6. Розпаковуємо архів у data/
+## 6. Розпаковуємо архів у data/
 
 ### macOS / Linux:
 ```bash
@@ -91,7 +91,7 @@ sudo apt install unzip
  b) data/fer2013/train, data/fer2013/test
 
 
-# 7. Якщо train/test розпакувались прямо в data/, переносимо їх у data/fer2013
+## 7. Якщо train/test розпакувались прямо в data/, переносимо їх у data/fer2013
 
 ### macOS / Linux:
 ```bash
@@ -111,7 +111,7 @@ if ((Test-Path "data/train") -and (Test-Path "data/test")) {
 }
 ```
 
-# 8. Якщо всередині data/fer2013 ще одна папка fer2013 (типовий кейс деяких архівів), пересунемо все всередину "правильно"
+## 8. Якщо всередині data/fer2013 ще одна папка fer2013 (типовий кейс деяких архівів), пересунемо все всередину "правильно"
 
 ### macOS / Linux:
 ```bash
@@ -132,7 +132,7 @@ if (Test-Path "data/fer2013/fer2013") {
 ```
 
 
-# 9. Створюємо validation з потрібними класами
+## 9. Створюємо validation з потрібними класами
 
 ### macOS / Linux:
 ```bash
@@ -147,7 +147,7 @@ foreach ($d in $classes) {
 }
 ```
 
-# 10. Переносимо по 100 зображень з train у validation для кожного класу
+## 10. Переносимо по 100 зображень з train у validation для кожного класу
 
 ### macOS / Linux:
 ```bash
@@ -177,7 +177,7 @@ data/
     └── test/
 
 
-# 11. Запуск моделей: 
+## 11. Запуск моделей: 
 обовʼязково знаходьтесь в корені проєкту: 
 
 - Простий рівень: 
@@ -200,7 +200,7 @@ python train_fer.py --model vit --data_root data/fer2013
 
 Можете для зручності запустити в трьох різних терміналах, і змінити кількість епох 
 
-# 12. Якщо хочете протестувати на зображенні виконайте: 
+## 12. Якщо хочете протестувати на зображенні виконайте: 
 ### Mac / Linux
 ```bash
 python -c "from train_fer import predict_image_cnn; predict_image_cnn('data/fer2013/test/Happy/PrivateTest_647018.jpg')" 
